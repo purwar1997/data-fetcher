@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import Axios from "axios";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// Axios resolves promise if data gets successfully fetched
+// and rejects promise if data can't get fetched
+
+const App = async () => {
+  //   Axios.get("https://randomuser.me/api/")
+  //     .then((res) => {
+  //       let name = res.data.results[0].name;
+  //       name = `${name.first} ${name.last}`;
+  //       console.log(name);
+  //     })
+  //     .catch((err) => console.log(err.message));
+
+  try {
+    const { data } = await Axios.get("https://randomuser.me/api/");
+    let name = data.results[0].name;
+    name = `${name.first} ${name.last}`;
+    console.log(name);
+  } catch ({ message }) {
+    console.log(message);
+  }
+
+  return <h1>API Call</h1>;
+};
 
 export default App;
