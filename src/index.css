@@ -1,0 +1,15 @@
+* {
+  font-family: "Segoe UI";
+  color: #313131;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#root {
+  margin-top: 20px;
+  text-align: center;
+}
