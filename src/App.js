@@ -59,7 +59,7 @@ const App = () => {
   return (
     <>
       <h1></h1>
-      <img src="" alt="" />
+      <img src="" alt="user-image" />
       <h2></h2>
       <p className="email"></p>
       <p className="phoneNo"></p>
