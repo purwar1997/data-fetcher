@@ -18,4 +18,4 @@ This project is a simple react app to fetch data from an API. It is created usin
 
 ![preview](./preview.png)
 
-### [Live link]() of the project.
+### [Live link](https://data-fetcher-app.vercel.app/) of the project.
