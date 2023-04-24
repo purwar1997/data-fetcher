@@ -6,13 +6,13 @@
 
 ## Description
 
-This project is a simple react app to fetch data from an API. It is created using HTML, CSS and React.js.
+This project is a react app to fetch data from an API.
 
 ## Things I learnt by creating this project :-
 
-- How to use `useEffect()` hook to manually update the DOM
-- What is `Axios` and how to use its `get()` method to fetch data from an API
-- What is `optional chaining operator (?.)` and how to use it
+- How to use `useState` and `useEffect` hooks
+- What is `Axios` and how to fetch data from an API
+- How to store data inside browser's `local storage`
 
 ### Preview of the project :-
 

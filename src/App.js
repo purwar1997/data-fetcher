@@ -1,80 +1,39 @@
-import Axios from "axios";
-import { useState, useEffect } from "react";
-import "./App.css";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Card from './components/Card';
+import ButtonGroup from './components/ButtonGroup';
 
-// Axios resolves promise if data gets successfully fetched
-// and rejects promise if data can't get fetched
-
-// When promise is resolved, response object is returned
-// When promise is rejected, error object is returned
-
-const App = () => {
-  //   Axios.get("https://randomuser.me/api/")
-  //     .then((res) => {
-  //       let name = res.data.results[0].name;
-  //       name = `${name.first} ${name.last}`;
-  //       console.log(name);
-  //     })
-  //     .catch((err) => console.log(err.message));
-
+export default function App() {
+  const [users, setUsers] = useState([{}]);
   const [index, setIndex] = useState(0);
 
-  async function fetchData() {
-    const img = document.querySelector("img");
-    const h1 = document.querySelector("h1");
-    const h2 = document.querySelector("h2");
-    const p_email = document.querySelector(".email");
-    const p_phone = document.querySelector(".phoneNo");
-    const p_address = document.querySelector(".address");
+  const fetchUsers = async () => {
+    const localUsers = JSON.parse(localStorage.getItem('users'));
 
-    try {
-      const { data } = await Axios.get("https://randomuser.me/api/");
-      const userInfo = data.results[0];
+    if (localUsers) {
+      setUsers(localUsers);
+    } else {
+      const response = await axios.get(
+        'https://randomuser.me/api/?inc=name,location,email,dob,phone,picture'
+      );
 
-      let imgURL = userInfo.picture?.large;
-      let name = userInfo.name;
-      name = `${name?.first} ${name?.last}`;
-
-      let email = userInfo.email;
-      let location = userInfo.location;
-      let address = `${location?.street?.number} ${location?.street?.name}, ${location?.city}, ${location?.state}, ${location?.country}`;
-
-      let phoneNo = userInfo.phone;
-
-      h1.textContent = `User ${index + 1}`;
-      img.setAttribute("src", imgURL);
-      h2.textContent = name;
-      p_email.textContent = `Email : ${email}`;
-      p_phone.textContent = `Phone No : ${phoneNo}`;
-      p_address.textContent = `Address : ${address}`;
-    } catch ({ message }) {
-      h1.textContent = message;
+      const user = response.data.results[0];
+      setUsers([user]);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData();
-  });
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('users', JSON.stringify(users));
+  }, [users]);
 
   return (
     <>
-      <h1></h1>
-      <img src="" alt="user-image" />
-      <h2></h2>
-      <p className="email"></p>
-      <p className="phoneNo"></p>
-      <p className="address"></p>
-
-      <div className="btns">
-        <button className="reset btn" onClick={() => setIndex(0)}>
-          Reset
-        </button>
-        <button className="next btn" onClick={() => setIndex(index + 1)}>
-          Next
-        </button>
-      </div>
+      <Card users={users} index={index} />
+      <ButtonGroup users={users} setUsers={setUsers} index={index} setIndex={setIndex} />
     </>
   );
-};
-
-export default App;
+}
