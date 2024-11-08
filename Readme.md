@@ -1,21 +1,22 @@
 # Data Fetcher
 
 ![HTML](https://img.shields.io/badge/-HTML-red)
-![CSS](https://img.shields.io/badge/-CSS-brightgreen)
-![React](https://img.shields.io/badge/-React-blueviolet)
+![CSS](https://img.shields.io/badge/-CSS-yellowgreen)
+![React JS](https://img.shields.io/badge/-React_JS-blue)
 
 ## Description
 
-This project is a react app to fetch data from an API.
+This project is a React app that fetches data from a public API and renders it inside a card. API returns data of a random user which is then being stored in browser's local storage.
 
-## Things I learnt by creating this project :-
+## What I learnt from building this project -
 
-- How to use `useState` and `useEffect` hooks
-- What is `Axios` and how to fetch data from an API
-- How to store data inside browser's `local storage`
+- State management of a React app using `useState` hook
+- Using `useEffect` hook to perform asynchronous operations like fetching data
+- Sending HTTP requests to a public API using `Axios` client
+- Using browser's `local storage` to store fetched data
 
-### Preview of the project :-
+### Preview of the project
 
 ![preview](./preview.png)
 
-### [Live link](https://data-fetcher-app.vercel.app/) of the project.
+### [Live link](https://data-fetcher-ten.vercel.app/) of the project.
