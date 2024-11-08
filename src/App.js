@@ -1,34 +1,31 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import Card from './components/Card';
 import ButtonGroup from './components/ButtonGroup';
+import { getUser } from './utils';
 
 export default function App() {
-  const [users, setUsers] = useState([{}]);
+  const [users, setUsers] = useState([]);
   const [index, setIndex] = useState(0);
 
-  const fetchUsers = async () => {
-    const localUsers = JSON.parse(localStorage.getItem('users'));
-
-    if (localUsers) {
-      setUsers(localUsers);
-    } else {
-      const response = await axios.get(
-        'https://randomuser.me/api/?inc=name,location,email,dob,phone,picture'
-      );
-
-      const user = response.data.results[0];
-      setUsers([user]);
-    }
-  };
-
   useEffect(() => {
-    fetchUsers();
+    const getListOfUsers = async () => {
+      let listOfUsers = JSON.parse(localStorage.getItem('users'));
+
+      if (!listOfUsers) {
+        const user = await getUser();
+        listOfUsers = [...users, user];
+        localStorage.setItem('users', JSON.stringify(listOfUsers));
+      }
+
+      setUsers(listOfUsers);
+    };
+
+    getListOfUsers();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('users', JSON.stringify(users));
-  }, [users]);
+  if (!users.length) {
+    return;
+  }
 
   return (
     <>
